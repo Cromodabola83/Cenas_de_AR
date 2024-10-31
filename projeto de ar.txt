@@ -1,0 +1,57 @@
+projeto de ar
+relógio
+problemas: O código direciona o programa para a função setup(), por motivos que desconheço
+
+// C++ code
+//
+#define LED_AMARELO_CARROS 5
+#define LED_AMARELO_PIAO 10
+#define LED_VERMELHO_PIAO 9
+#define LED_VERDE_CARROS 6
+#define LED_VERMELHO_CARROS 3
+#define Botao 13
+bool estado=true;
+int tempo=0;
+void setup()
+  
+{
+  pinMode(10, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(13, INPUT_PULLUP);
+  
+ 
+}
+
+void loop()
+{
+  if(estado){
+    if(digitalRead(Botao)==HIGH){
+    	digitalWrite(LED_VERDE_CARROS, HIGH);
+    	digitalWrite(LED_VERMELHO_PIAO, HIGH);
+    }
+    if(digitalRead(Botao)==LOW){
+      estado=!estado;
+      digitalWrite(LED_VERDE_CARROS, LOW);
+      digitalWrite(LED_VERMELHO_PIAO, LOW);
+      digitalWrite(LED_AMARELO_CARROS, HIGH);
+      delay(5000);
+      digitalWrite(LED_AMARELO_CARROS, LOW);
+      digitalWrite(LED_VERMELHO_CARROS, HIGH);
+    }
+  }
+  if(!estado){
+      digitalWrite(LED_AMARELO_PIAO, HIGH);
+      delay(500);
+      digitalWrite(LED_AMARELO_PIAO, LOW);
+      delay(500);
+    tempo++;
+    if(tempo>=25){
+    	estado=!estado;
+      digitalWrite(LED_VERMELHO_CARROS, LOW);
+      digitalWrite(LED_VERDE_CARROS, HIGH);
+    }
+  }
+}
